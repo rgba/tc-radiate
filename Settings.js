@@ -4,33 +4,35 @@
 
     //Only show builds for branches that satisfy the predicate
     branchFilter: function(branch) {
-        return (
-            (branch.buildType.projectName != "Single Sign On :: Dev" 
-                || [
-                    "Run BDD tests on develop branch"
-                ].indexOf(branch.buildType.name) == -1) // Ignore SSO E2E tests, as they are not reliable. Fix and unignore!
-            && (!(branch.buildType.projectName.startsWith("Tour Itinerary Portal") && branch.buildType.name.indexOf("Delete stack") > -1) || branch.name) // Non-VCS builds have been deprecated 
-            && (branch.buildType.projectName != "iTROPICS" 
-                || [
-                    "AWS Deploy QA",
-                    "AWS Deploy Dev",
-                    "Booking Engine Deploy Dev"
-                ].indexOf(branch.buildType.name) == -1) // Ignore iTropics QA and Dev deployment, as the environment is not ready.
-            && (!(branch.buildType.projectName.startsWith("iTROPICS") && branch.buildType.name.indexOf("Run Acceptance Tests") > -1) || branch.name) // Non-VCS builds have been deprecated 
-            && (branch.buildType.projectName != "iTROPICS :: MMBAir" 
-                || branch.buildType.name.indexOf("Run Acceptance Tests") == -1) // Ignore MMBAir E2E tests, as not set up yet
-            && (branch.buildType.projectName != "AWS Tools") // Ignore AWS Tools, due to unstable tests
-            && (
-                !branch.name /* No branch name is there for builds with no VCS roots at all, or when 'Branch specification' is left empty (e.g. when not using feature branches at all)*/
-                || [
-                    "<default>"/*This branch name is used for the default builds, when there are multiple VCS roots with different branches (e.g. source and config files are in different repos) */,
-                    "master",
-                    "refs/heads/master" /* Long Git 'refs/...' names are used when 'Branch specification' doesn't have a '*' and paretheses are also not being used to mark the 'Logical branch name' - see https://confluence.jetbrains.com/display/TCD9/Working+with+Feature+Branches#WorkingwithFeatureBranches-Logicalbranchname */,
-                    "develop",
-                    "refs/heads/develop"
-                ].indexOf(branch.name) > -1
-            )
-        );
+        // return (
+        //     (branch.buildType.projectName != "Single Sign On :: Dev" 
+        //         || [
+        //             "Run BDD tests on develop branch"
+        //         ].indexOf(branch.buildType.name) == -1) // Ignore SSO E2E tests, as they are not reliable. Fix and unignore!
+        //     && (!(branch.buildType.projectName.startsWith("Tour Itinerary Portal") && branch.buildType.name.indexOf("Delete stack") > -1) || branch.name) // Non-VCS builds have been deprecated 
+        //     && (branch.buildType.projectName != "iTROPICS" 
+        //         || [
+        //             "AWS Deploy QA",
+        //             "AWS Deploy Dev",
+        //             "Booking Engine Deploy Dev"
+        //         ].indexOf(branch.buildType.name) == -1) // Ignore iTropics QA and Dev deployment, as the environment is not ready.
+        //     && (!(branch.buildType.projectName.startsWith("iTROPICS") && branch.buildType.name.indexOf("Run Acceptance Tests") > -1) || branch.name) // Non-VCS builds have been deprecated 
+        //     && (branch.buildType.projectName != "iTROPICS :: MMBAir" 
+        //         || branch.buildType.name.indexOf("Run Acceptance Tests") == -1) // Ignore MMBAir E2E tests, as not set up yet
+        //     && (branch.buildType.projectName != "AWS Tools") // Ignore AWS Tools, due to unstable tests
+        //     && (
+        //         !branch.name /* No branch name is there for builds with no VCS roots at all, or when 'Branch specification' is left empty (e.g. when not using feature branches at all)*/
+        //         || [
+        //             "<default>"/*This branch name is used for the default builds, when there are multiple VCS roots with different branches (e.g. source and config files are in different repos) */,
+        //             "master",
+        //             "refs/heads/master" /* Long Git 'refs/...' names are used when 'Branch specification' doesn't have a '*' and paretheses are also not being used to mark the 'Logical branch name' - see https://confluence.jetbrains.com/display/TCD9/Working+with+Feature+Branches#WorkingwithFeatureBranches-Logicalbranchname */,
+        //             "develop",
+        //             "refs/heads/develop"
+        //         ].indexOf(branch.name) > -1
+        //     )
+        // );
+        return (["1. Unit Tests"].indexOf(branch.buildType.name) > -1 && ["<default>", "refs/heads/develop", "develop", "feature/MTXTB-134_migrate_to_jpa_criteria"].indexOf(branch.name) > -1)
+                || (["2. Integration Tests"].indexOf(branch.buildType.name) > -1 && ["<default>", "refs/heads/develop", "develop", "refs/heads/feature/MTXTB-134_migrate_to_jpa_criteria"].indexOf(branch.name) > -1);;
     },
 };
 

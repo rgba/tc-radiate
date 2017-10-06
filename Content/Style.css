@@ -120,7 +120,7 @@ a:hover {
 }
 
 #main-branch-name {
-    font-size: 2em;
+    font-size: 1em;
     text-align: center;
 }
 
@@ -149,7 +149,8 @@ a:hover {
 
 #left-panel .build-project { 
     padding-right: .2em;
-    font-size:3em;
+    font-size:1em;
+    display: none; /* @MTX disabled project name*/
 }
 
 #left-panel .build-type {
