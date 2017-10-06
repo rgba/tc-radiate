@@ -1,6 +1,6 @@
 ﻿var organizationSettings = {
     //The url that points to team city
-    teamCityUrl: 'https://teamcity.travcorpservices.com',
+    teamCityUrl: 'http://teamcity.dss.fatfoogoo.com',
 
     //Only show builds for branches that satisfy the predicate
     branchFilter: function(branch) {
@@ -36,7 +36,7 @@
 
 var DefaultSettings = {
     //The main branch to show the master build status on the right hand panel on the screen. Leave empty to show the first failed one.
-    mainBranch: '',
+    mainBranch: 'develop',
 
     //Proxy to handle the cross domain ajax request.
     // This will need to be hosted on the relevant server e.g. proxy-node.js on Node.js or proxy-aspnet.ashx on IIS
@@ -45,7 +45,7 @@ var DefaultSettings = {
 
     // If your TeamCity is set up for guest access, you can just use it. Otherwise, the moment that tc-radiate sends first request to TC, TC will
     // ask the user for basic http credentials. Your browser may even offer you to save them.
-    useTeamCityGuest: false,
+    useTeamCityGuest: true,
 
     //How often to refresh the whole page in order to update the application (to get all the latest changes without having to come to the monitor and refresh).
     // Set to [0/undefined/null] to disable just this. Use enableAutoUpdate to disable this and any data updates.
